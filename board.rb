@@ -36,16 +36,6 @@ class Board
     end
   end
 
-  def dup
-    new_board = Board.new(false)
-
-    pieces.each do |piece|
-      piece.class.new(piece.color, new_board, piece.pos)
-    end
-
-    new_board
-  end
-
   def empty?(pos)
     self[pos].empty?
   end
@@ -55,6 +45,16 @@ class Board
     pieces.any? do |p|
       p.color != color && p.moves.include?(king_pos)
     end
+  end
+
+  def board_dup
+    new_board = Board.new(false)
+
+    pieces.each do |piece|
+      piece.class.new(piece.color, new_board, piece.pos)
+    end
+
+    new_board
   end
 
   def move_piece(turn_color, from_pos, to_pos)
