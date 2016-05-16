@@ -4,7 +4,7 @@ class Board
   attr_reader :rows
 
   def initialize(fill_board = true)
-    @sentinel = NullPiece.instance
+    @blank_piece = NullPiece.instance
     make_starting_grid(fill_board)
   end
 
@@ -78,7 +78,7 @@ class Board
     raise 'piece cannot move like that' unless piece.moves.include?(to_pos)
 
     self[to_pos] = piece
-    self[from_pos] = sentinel
+    self[from_pos] = blank_piece
     piece.pos = to_pos
 
     nil
@@ -116,7 +116,7 @@ class Board
   end
 
   def make_starting_grid(fill_board)
-    @rows = Array.new(8) { Array.new(8, sentinel) }
+    @rows = Array.new(8) { Array.new(8, blank_piece) }
     return unless fill_board
     [:white, :black].each do |color|
       fill_back_row(color)
@@ -125,5 +125,5 @@ class Board
   end
 
   private
-  attr_reader :sentinel
+  attr_reader :blank_piece
 end
