@@ -1,12 +1,12 @@
 module Slideable
-  HORIZONTAL_DIRS = [
+  HORIZONTALS = [
     [-1, 0],
     [0, -1],
     [0, 1],
     [1, 0]
   ]
 
-  DIAGONAL_DIRS = [
+  DIAGONALS = [
     [-1, -1],
     [-1, 1],
     [1, -1],
@@ -14,11 +14,11 @@ module Slideable
   ]
 
   def horizontal_dirs
-    HORIZONTAL_DIRS
+    HORIZONTALS
   end
 
   def diagonal_dirs
-    DIAGONAL_DIRS
+    DIAGONALS
   end
 
   def moves
@@ -32,10 +32,6 @@ module Slideable
   end
 
   private
-
-  def move_dirs
-    raise NotImplementedError
-  end
 
   def grow_unblocked_moves_in_dir(dx, dy)
     cur_x, cur_y = pos

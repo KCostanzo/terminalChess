@@ -13,10 +13,4 @@ module Stepable
       end
     end
   end
-
-  private
-
-  def move_diffs
-    raise NotImplementedError
-  end
 end
