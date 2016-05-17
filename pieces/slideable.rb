@@ -47,8 +47,6 @@ module Slideable
       else
         # can take an opponent's piece
         moves << pos if board[pos].color != color
-
-        # can't move past blocking piece
         break
       end
     end
