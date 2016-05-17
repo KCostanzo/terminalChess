@@ -18,7 +18,7 @@ class Game
     until board.checkmate?(current_player)
       begin
         from_pos, to_pos = players[current_player].make_move(board)
-        board.move_piece(current_player, from_pos, to_pos)
+        board.move(current_player, from_pos, to_pos)
 
         switch_players!
         update_status
@@ -30,7 +30,6 @@ class Game
 
     display.render
     puts "#{current_player} checkmated!"
-
     nil
   end
 

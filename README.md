@@ -41,7 +41,7 @@ The logic for the piece's availible moves is in the piece itself (pawn) or one o
   	private
 
 	def move_into_check?(to_pos)
-    	test_board = board.dup
+    	test_board = board.board_dup
     	test_board.move_piece!(pos, to_pos)
     	test_board.in_check?(color)
 	end

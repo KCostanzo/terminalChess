@@ -20,7 +20,6 @@ class Piece
   end
 
   def symbol
-    # subclass implements this with unicode chess char
     raise NotImplementedError
   end
 

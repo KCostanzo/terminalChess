@@ -28,23 +28,8 @@ class Board
     self[pos] = piece
   end
 
-  def checkmate?(color)
-    return false unless in_check?(color)
-
-    pieces.select { |p| p.color == color }.all? do |piece|
-      piece.valid_moves.empty?
-    end
-  end
-
   def empty?(pos)
     self[pos].empty?
-  end
-
-  def in_check?(color)
-    king_pos = find_king(color).pos
-    pieces.any? do |p|
-      p.color != color && p.moves.include?(king_pos)
-    end
   end
 
   def board_dup
@@ -57,7 +42,7 @@ class Board
     new_board
   end
 
-  def move_piece(turn_color, from_pos, to_pos)
+  def move(turn_color, from_pos, to_pos)
     raise 'from position is empty' if empty?(from_pos)
 
     piece = self[from_pos]
@@ -72,7 +57,7 @@ class Board
     move_piece!(from_pos, to_pos)
   end
 
-  # move without performing checks
+  # move without checks
   def move_piece!(from_pos, to_pos)
     piece = self[from_pos]
     raise 'piece cannot move like that' unless piece.moves.include?(to_pos)
@@ -92,9 +77,22 @@ class Board
     pos.all? { |coord| coord.between?(0, 7) }
   end
 
-  protected
+  def in_check?(color)
+    king_pos = find_king(color).pos
+    pieces.any? do |p|
+      p.color != color && p.moves.include?(king_pos)
+    end
+  end
 
-  def fill_back_row(color)
+  def checkmate?(color)
+    return false unless in_check?(color)
+
+    pieces.select { |p| p.color == color }.all? do |piece|
+      piece.valid_moves.empty?
+    end
+  end
+
+  def back_row(color)
     back_pieces = [
       Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook
     ]
@@ -105,7 +103,7 @@ class Board
     end
   end
 
-  def fill_pawns_row(color)
+  def pawn_row(color)
     i = (color == :white) ? 6 : 1
     8.times { |j| Pawn.new(color, self, [i, j]) }
   end
@@ -119,8 +117,8 @@ class Board
     @rows = Array.new(8) { Array.new(8, blank_piece) }
     return unless fill_board
     [:white, :black].each do |color|
-      fill_back_row(color)
-      fill_pawns_row(color)
+      back_row(color)
+      pawn_row(color)
     end
   end
 

@@ -34,7 +34,6 @@ module Slideable
   private
 
   def move_dirs
-    # subclass implements this
     raise NotImplementedError
   end
 

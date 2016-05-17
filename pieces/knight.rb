@@ -8,8 +8,6 @@ class Knight < Piece
     '♞'.colorize(color)
   end
 
-  protected
-
   def move_diffs
     [[-2, -1],
      [-1, -2],

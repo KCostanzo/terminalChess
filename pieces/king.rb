@@ -8,8 +8,6 @@ class King < Piece
     '♚'.colorize(color)
   end
 
-  protected
-
   def move_diffs
     [[-1, -1],
      [-1, 0],

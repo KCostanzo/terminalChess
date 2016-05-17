@@ -8,8 +8,6 @@ class Rook < Piece
     '♜'.colorize(color)
   end
 
-  protected
-
   def move_dirs
     horizontal_dirs
   end
